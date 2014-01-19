@@ -28,7 +28,7 @@
 <!--on-tap="bla" on-hold="bli" on-release="blo" on-holdpulse="ble"-->
 
 <polymer-element name="three-viewer"
-attributes="viewAngle cameraUp projection orientation autoRotate  postProcess fullScreen showStats showShadows showGrid showAxes" >
+attributes="viewAngle cameraUp projection orientation autoRotate  postProcess fullScreen showStats showShadows showGrid showAxes selectedObject" >
   <template>
     <link rel="stylesheet" type="text/css" href="three-viewer.css">
     <div id="viewWrapper" touch-action="none" on-pointermove="{{onPointerMove}}" on-pointerdown="{{onPointerDown}}" on-pointerup="{{onPointerUp}}" >

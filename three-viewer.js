@@ -59,8 +59,56 @@ Polymer('three-viewer', {
       this.renderer.initWebGLObjects(this.scene);
     }
   },
-	addToScene: function ( object )
+	addToScene: function ( object , options)
 	{
+    /*
+    var center = options.center || true;
+    var resize = options.resize || true;
+
+    if( autoCenter)
+    {
+      var offset = geometry.boundingSphere.center;
+      geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -offset.x, -offset.y, -offset.z ) );
+    }
+    //resizing hacks
+    if( autoResize)
+    {
+      var size = geometry.boundingSphere.radius;
+
+      if( size < this.minObjectSize)
+      {
+        resource.centeringRequired = true;
+        var ratio = geometry.boundingSphere.radius/this.minObjectSize;
+        var scaling = 1/ratio;
+        geometry.applyMatrix( new THREE.Matrix4().makeScale( scaling, scaling, scaling ) );
+      }
+      else if(size > this.maxObjectSize)
+      {
+        resource.scalingRequired = true;
+        var ratio = geometry.boundingSphere.radius/this.maxObjectSize;
+        var scaling = 1/ratio;
+        geometry.applyMatrix( new THREE.Matrix4().makeScale( scaling, scaling, scaling ) );
+      }
+    }
+    try
+    {
+      if( autoResize)
+      {
+        var bSphere = computeObject3DBoundingSphere(resourceData);
+        var size = bSphere.radius;
+
+        if( size < this.minObjectSize)
+        {
+          resource.centeringRequired = true;
+          var ratio = size/this.minObjectSize;
+          var scaling = 1/ratio;
+          resourceData.applyMatrix( new THREE.Matrix4().makeScale( scaling, scaling, scaling ) );
+        }
+    }
+    }catch(error)
+    {console.log("failed to auto resize ",error)}*/
+  
+
 		try
 		{
 			this.rootAssembly.add( object );
