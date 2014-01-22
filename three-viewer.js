@@ -40,6 +40,7 @@ Polymer('three-viewer', {
 
     //setup various handlers
     window.addEventListener("resize",this.onResize.bind(this));
+    window.addEventListener("orientationchange",this.onResize.bind(this));
 
     if (this.requestFullscreen) document.addEventListener("fullscreenchange", this.onFullScreenChange.bind(this), false);
     if (this.mozRequestFullScreen) document.addEventListener("mozfullscreenchange", this.onFullScreenChange.bind(this), false);
