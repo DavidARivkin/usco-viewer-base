@@ -39,12 +39,22 @@ Polymer('three-viewer', {
     this.animate();
 
     //setup various handlers
-    window.addEventListener("resize",this.onResize.bind(this));
-    window.addEventListener("orientationchange",this.onResize.bind(this));
+    this._resizeListener = window.addEventListener("resize",this.onResize.bind(this));
+    this._orientListener = window.addEventListener("orientationchange",this.onResize.bind(this));
 
-    if (this.requestFullscreen) document.addEventListener("fullscreenchange", this.onFullScreenChange.bind(this), false);
-    if (this.mozRequestFullScreen) document.addEventListener("mozfullscreenchange", this.onFullScreenChange.bind(this), false);
-    if (this.webkitRequestFullScreen) document.addEventListener("webkitfullscreenchange", this.onFullScreenChange.bind(this), false);
+    if (this.requestFullscreen)       this._fullScreenListener = document.addEventListener("fullscreenchange", this.onFullScreenChange.bind(this), false);
+    if (this.mozRequestFullScreen)    this._fullScreenListener = document.addEventListener("mozfullscreenchange", this.onFullScreenChange.bind(this), false);
+    if (this.webkitRequestFullScreen) this._fullScreenListener = document.addEventListener("webkitfullscreenchange", this.onFullScreenChange.bind(this), false);
+  },
+  leftView: function()
+  {
+    //cleanup when leaving view
+    window.removeEventListener("resize",this._resizeListener);
+    window.removeEventListener("orientationchange",this._orientListener);
+    
+    if (this.requestFullscreen)       document.removeEventListener("fullscreenchange", this._fullScreenListener ); 
+    if (this.mozRequestFullScreen)    document.removeEventListener("fullscreenchange", this._fullScreenListener ); 
+    if (this.webkitRequestFullScreen) document.removeEventListener("fullscreenchange", this._fullScreenListener );
   },
   //public api
   clearScene:function()
@@ -336,8 +346,7 @@ Polymer('three-viewer', {
 
     //resize all that is needed
 
-    //BUG in firefox: dpr is not 1 on desktop, scaling issue ensue, so forcing to "1"
-    this.dpr=1;
+    this.dpr = (window.devicePixelRatio) ? window.devicePixelRatio: 1;
 		this.resUpscaler = 1;
     this.hRes = this.width * this.dpr * this.resUpscaler;
     this.vRes = this.height * this.dpr * this.resUpscaler;
