@@ -215,6 +215,12 @@ Polymer('three-viewer', {
 	{
     var lighting = new Lighting(this.camera.far);
     this.scene.add( lighting );
+    
+    for(var i=0;i<lighting.children.length-1;i++)
+    {
+      this.camera.add( lighting.children[i] );
+    }
+    //this.camera.add( lighting.children[lighting.children.length-1])
     this.lighting = lighting;
 	},
   setupPostProcess:function()

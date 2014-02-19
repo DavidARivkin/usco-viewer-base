@@ -14,6 +14,7 @@ Lighting = function (cameraFar) {
   ambientColor = 0x565595;
   ambientColor = 0x161515;
   ambientLight = new THREE.AmbientLight(ambientColor);
+  ambientLight.intensity = 0.8;
 
   var SHADOW_MAP_WIDTH = 4096, SHADOW_MAP_HEIGHT = 2048;
   spotLight = new THREE.SpotLight( 0xbbbbbb, 0.8, 0, Math.PI, 1 );
@@ -36,16 +37,15 @@ Lighting = function (cameraFar) {
 
 
   //sky color ground color intensity 
-  hemiLight = new THREE.HemisphereLight( 0x0000ff, 0x00ff00, 0.6 );
-  hemiLight = new THREE.HemisphereLight( 0xffEEEE, 0xffEEEE, 0.2 );
+  hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.55 );
 		/*hemiLight.color.setHSV( 0.8, 0.25, 1 );
 		hemiLight.groundColor.setHSV( 0.095, 0.2, 1 );*/
-		hemiLight.position.set( 0, 1200, 5000 );
+		//hemiLight.position.set( 0, 1200, 5000 );
 	  
   
-  dirLight = new THREE.DirectionalLight( 0xffffff, 0.2 );
+  dirLight = new THREE.DirectionalLight( 0xffffff, 0.55 );
 		//dirLight.color.setHSV( 0.1, 0.1, 1 );
-		dirLight.position.set( 0, 50, 300 );
+		//dirLight.position.set( 0, 50, 300 );
 		//dirLight.position.multiplyScalar( 50 );
 
 		dirLight.castShadow = true;
@@ -69,7 +69,7 @@ Lighting = function (cameraFar) {
   dirLight.shadowDarkness = shadowConst * dirLight.intensity;
 
   //3 point lighting test
-  var pLigthIntensity = 0.5;
+  var pLigthIntensity = 0.2;
   var pLight = new THREE.DirectionalLight( 0xfcfc7e, pLigthIntensity );
   pLight.position.set( 100, 150, 200 );
   pLight.target.position.set(0,0,0);
@@ -82,7 +82,7 @@ Lighting = function (cameraFar) {
   pLight3.position.set( -100, 0, -200 );
   pLight3.target.position.set(0,0,0);
 
-
+//,pLight,pLight2
 	lights = [ambientLight,hemiLight,dirLight,pLight,pLight2]
 
 	for (var i=0; i<lights.length; i++)
